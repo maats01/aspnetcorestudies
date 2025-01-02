@@ -1,1 +1,1 @@
-Repositório voltado para as atividades realizadas durante o curso de ASP NET Core
+Repositório voltado para as atividades realizadas durante os meus estudos do framework ASP NET Core.
