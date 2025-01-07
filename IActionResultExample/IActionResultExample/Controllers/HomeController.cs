@@ -1,48 +1,33 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using IActionResultExample.Models;
 
 namespace IActionResultExample.Controllers
 {
     public class HomeController : Controller
     {
-        [Route("book")]
-        public IActionResult Index()
+        [Route("bookstore")]
+        public IActionResult Index(int? bookId, bool? isLoggedIn, Book book)
         {
-            if (!Request.Query.ContainsKey("bookid"))
+            if (bookId == null)
             {
-                //Response.StatusCode = 400;
-                //return Content("Book id not supplied");
-                return BadRequest("Book id not supplied");
+                return BadRequest("Book id not supplied or empty");
             }
 
-            if (string.IsNullOrEmpty(Convert.ToString(Request.Query["bookid"])))
-            {
-                //Response.StatusCode = 400;
-                //return Content("Book id cannot be null or empty");
-                return BadRequest("Book id cannot be null or empty");
-            }
-
-            int bookId = Convert.ToInt16(ControllerContext.HttpContext.Request.Query["bookid"]);
             if (bookId <= 0)
             {
-                //Response.StatusCode = 400;
-                //return Content("Book id cannot be less than or equal to zero");
                 return BadRequest("Book id cannot be less than or equal to zero");
             }
             if (bookId > 1000)
             {
-                //Response.StatusCode = 400;
-                //return Content("Book id cannot be greater than 1000");
                 return NotFound("Book id cannot be greater than 1000");
             }
 
-            if (!Convert.ToBoolean(Request.Query["isloggedin"]))
+            if (isLoggedIn == false)
             {
-                //Response.StatusCode = 401;
-                //return Content("User must be authenticated");
                 return Unauthorized("User must be authenticated");
             }
 
-            return File("/dog.png", "image/png");
+            return Content($"Book id: {bookId}", "text/plain");
         }
     }
 }
