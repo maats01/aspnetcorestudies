@@ -1,0 +1,34 @@
+﻿@model IEnumerable<CityWeather>
+@{
+
+    ViewData["Title"] = "Weather";
+    string GetCssClassByFahrenheit(int fahrenheit)
+    {
+        return fahrenheit switch
+        {
+            (< 44) => "blue-back",
+            (>= 44) and (< 75) => "green-back",
+            (>= 75) => "orange-back"
+        };
+    }
+}
+
+<div class="margin-top-200 margin-left">
+    <div class="flex">
+        @foreach (CityWeather cityWeather in Model)
+        {
+            <div class="box cursor-pointer w-30 @GetCssClassByFahrenheit(cityWeather.TemperatureFahrenheit)">
+                <div class="flex-borderless">
+                    <div class="w-50">
+                        <h2>@cityWeather.CityName</h2>
+                        <h4 class="text-dark-grey">@cityWeather.DateAndTime.ToString("hh:mm tt")</h4>
+                        <a href="/weather/@cityWeather.CityUniqueCode" class="margin-top">Details</a>
+                    </div>
+                    <div class="w-50 border-left">
+                        <h1 class="margin-left">@cityWeather.TemperatureFahrenheit <sup class="text-dark-grey">&#8457</sup></h1>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
