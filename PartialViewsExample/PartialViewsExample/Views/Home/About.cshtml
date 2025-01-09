@@ -1,0 +1,11 @@
+﻿@model ListModel
+
+<h1>About</h1>
+@{
+    ListModel list = new ListModel()
+    {
+        ListTitle = "Programming languages",
+        ListItems = new List<string>() { "Python", "C#", "Java", "C" }
+    };
+}
+@await Html.PartialAsync("_ListPartialView", list)
