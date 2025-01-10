@@ -1,0 +1,14 @@
+﻿@model IEnumerable<CityWeather>
+@{
+
+    ViewData["Title"] = "Weather";
+}
+
+<div class="margin-top-200 margin-left">
+    <div class="flex">
+        @foreach (CityWeather cityWeather in Model)
+        {
+            @await Component.InvokeAsync("CityWeather", new { model = cityWeather });
+        }
+    </div>
+</div>

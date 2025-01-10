@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+
+<h1>About</h1>
+
+@{
+    PersonGridModel model = new PersonGridModel()
+            {
+                GridTitle = "Employees",
+                Persons = new List<Person>()
+                {
+                    new Person() { PersonName = "Sarah", JobTitle = "Developer" },
+                    new Person() { PersonName = "Varun", JobTitle = "UI Designer" },
+                    new Person() { PersonName = "Strinivas", JobTitle = "Analyst" }
+                }
+            };
+}
+
+<vc:grid grid="model"></vc:grid>
