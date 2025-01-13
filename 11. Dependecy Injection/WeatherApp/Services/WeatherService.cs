@@ -5,32 +5,27 @@ namespace Services
 {
     public class WeatherService : IWeatherService
     {
-        public CityWeather? GetWeatherByCityCode(string cityCode)
+        private readonly List<CityWeather> _cities;
+
+        public WeatherService()
         {
-            List<CityWeather> cityWeatherList = new List<CityWeather>()
+            _cities = new List<CityWeather>()
             {
                 new CityWeather() {CityUniqueCode = "LDN", CityName = "London", DateAndTime = Convert.ToDateTime("2030-01-01 8:00"),  TemperatureFahrenheit = 33},
                 new CityWeather() {CityUniqueCode = "NYC", CityName = "New York City", DateAndTime = Convert.ToDateTime("2030-01-01 3:00"),  TemperatureFahrenheit = 60},
                 new CityWeather() {CityUniqueCode = "PAR", CityName = "Paris", DateAndTime = Convert.ToDateTime("2030-01-01 9:00"),  TemperatureFahrenheit = 82}
 
             };
-
-            CityWeather? city = cityWeatherList.Where(cityWeather => cityWeather.CityUniqueCode == cityCode).FirstOrDefault();
-
+        }
+        public CityWeather? GetWeatherByCityCode(string cityCode)
+        {
+            CityWeather? city = _cities.FirstOrDefault(x => x.CityUniqueCode == cityCode);
             return city;
         }
 
         public List<CityWeather> GetWeatherDetails()
         {
-            List<CityWeather> cityWeatherList = new List<CityWeather>()
-            {
-                new CityWeather() {CityUniqueCode = "LDN", CityName = "London", DateAndTime = Convert.ToDateTime("2030-01-01 8:00"),  TemperatureFahrenheit = 33},
-                new CityWeather() {CityUniqueCode = "NYC", CityName = "New York", DateAndTime = Convert.ToDateTime("2030-01-01 3:00"),  TemperatureFahrenheit = 60},
-                new CityWeather() {CityUniqueCode = "PAR", CityName = "Paris", DateAndTime = Convert.ToDateTime("2030-01-01 9:00"),  TemperatureFahrenheit = 82}
-
-            };
-
-            return cityWeatherList;
+            return _cities;
         }
     }
 }
