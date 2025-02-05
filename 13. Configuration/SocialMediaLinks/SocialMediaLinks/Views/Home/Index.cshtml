@@ -1,0 +1,17 @@
+﻿@model SocialMediaLinks.SocialMediaLinksOptions 
+
+@{
+    ViewBag.Title = "Social Media Links";
+}
+
+<div class="flex">
+    <div><a href="@Model.Facebook">Facebook</a></div>
+    
+    <environment exclude="Development">
+        <div><a href="@Model.Instagram">Instagram</a></div>
+    </environment>
+
+    <div><a href="@Model.Twitter">Twitter</a></div>
+
+    <div><a href="@Model.Youtube">Youtube</a></div>
+</div>
